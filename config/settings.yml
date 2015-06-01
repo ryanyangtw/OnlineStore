@@ -1,0 +1,20 @@
+defaults: &defaults
+  your_mysql_username: root
+  your_mysql_password: ryan1146
+  
+  stripe:
+    public_key: 'pk_test_4TNwAuqdAD1y0Ut9RTr1iVI1'
+    secret_key: 'sk_test_4RY761zzTqgVHQNB5ciHEW9X'
+  mailgun:
+    password: '7nnf09260l03'
+  
+
+development:
+  <<: *defaults
+
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
