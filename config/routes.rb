@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   namespace :admin do
+    resources :stores, only: :index do
+      member do
+        post :approve
+      end
+    end
+    get "my_store", to: "products#index"
     resources :products do
       resources :photos
     end
@@ -56,9 +62,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :stores, only: [:index, :show, :new, :create]
 
-  root :to => "products#index"
+  # root :to => "products#index"
+  root to: "stores#index"
 
+  mount API::Root => '/'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

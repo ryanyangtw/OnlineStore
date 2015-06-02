@@ -1,0 +1,41 @@
+
+<div class=well>
+  <h3>
+    <%= @store.name %>  
+  </h3>
+
+  <hr>
+
+  <h4>
+    <%= simple_format(@store.introduction) %>
+  </h4>  
+</div>
+
+<hr>
+
+<div class="row">
+
+<% @store.products.each do |product| %>
+  <div class="col-md-4 product-box">
+    <div class="panel panel-default">
+      <div class="group">
+        <%= link_to product_path(product) do%>
+          <%= image_tag(product.default_photo.image_url, class: "img-cover") %>
+        <%end%>
+      </div>
+
+      <hr>
+      
+      
+      <%#= image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@store.owner.try(:email).try(:downcase))}?s=40", class: "img-avatar")%>
+  
+      <%= product.title %>
+       
+      
+    </div>
+
+  </div>
+<% end %>
+
+</div>
+

@@ -18,6 +18,7 @@ class Order < ActiveRecord::Base
 	include Tokenable
 
 	belongs_to :user
+	belongs_to :seller, class_name: "User", foreign_key: :seller_id
 	has_many :items, :class_name => "OrderItem", :dependent => :destroy
 	has_one :info, :class_name => "OrderInfo", :dependent => :destroy
 
@@ -33,6 +34,7 @@ class Order < ActiveRecord::Base
 			item.product_name = cart_item.product.title
 			item.quantity = cart_item.quantity
 			item.price = cart_item.product.price
+			item.seller = cart_item.product.store.owner
 			item.save
 		end
 	end
@@ -74,11 +76,17 @@ class Order < ActiveRecord::Base
 
 		state :shipping
 		event :ship do
+			after do
+				EmailWorker.perform_async(self.id, 'after_product_is_shipping_sending_email_to_buyer')
+			end
 			transitions :from => :paid, :to => :shipping
 		end
 
 		state :shipped
 		event :deliver do
+			after do 
+				EmailWorker.perform_async(self.id, 'after_product_is_shipped_sending_email_to_buyer')
+			end
 			transitions :from => :shipping, :to => :shipped
 		end
 

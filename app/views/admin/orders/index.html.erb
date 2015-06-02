@@ -4,6 +4,7 @@
     <table class="table table-hover table-bordered">
       <thead>
         <tr>
+          <th>商店名稱</th>
           <th>訂單編號</th>
           <th>生成時間</th>
           <th>訂單金額</th>        
@@ -15,7 +16,7 @@
         <% @orders.each do |order| %>
           <%= render_admin_order_table_row(order)%>  
           <!--<tr>-->
-
+            <td><%= order.try(:seller).try(:store).try(:name) %></td> 
             <td><%= render_admin_order_link(order)%></td>
            <td> <%= render_order_created_time(order) %> </td>
 

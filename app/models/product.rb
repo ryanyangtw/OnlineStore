@@ -20,6 +20,8 @@ class Product < ActiveRecord::Base
 	validates :title, :presence => true
 	validates :quantity, :presence => true
 
+  belongs_to :store
+
 	def default_photo
 		photos.first
 	end

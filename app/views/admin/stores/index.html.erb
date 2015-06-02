@@ -1,0 +1,49 @@
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Store Name</th>
+      <th>銀行帳戶</th>
+      <th>Store Photo</th>
+      <th>授權狀態</th>
+      <th>授權商店</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+    <tr>
+      <td> 
+        <%= store.id %>
+      </td>
+
+      <td>
+        <h4><%= link_to(store.name , store_path(store))%></h4>   
+      </td>
+
+      <td>
+        <%= store.bank_account %>
+      </td> 
+      
+      <td class="store-img">   
+      <%=link_to store_path(store) do%>  
+        <%= image_tag( store.image_url, :class=>"img-rounded") %>   
+      <%end%>    
+      </td>
+
+      <td> 
+        <% if store.approved? %>
+          <span class="label label-info">已授權</span>  
+        <% else %>
+          <span class="label label-danger">未授權</span>  
+        <% end %>
+      </td>
+      
+      <td> <%= link_to("Approve", approve_admin_store_path(store) , class: "btn btn-primary", method: :posts) %> </td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.2"
+ruby "2.1.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -46,8 +46,7 @@ gem "simple_form", "3.1.0rc1"
 gem 'bootstrap-sass', '~> 3.2.0.0'
 #The bootstrap-sass-rails gem is deprecated starting with version 3.1.0.0.
 #gem 'bootstrap-sass-rails', '~> 3.1.0.0'
-gem 'will_paginate' , '~> 3.0'
-gem 'will_paginate-bootstrap' 
+
 gem 'devise' , '~> 3.2'
 gem 'carrierwave'
 gem 'fog'
@@ -68,6 +67,33 @@ gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'sidekiq', '~> 3.2.1'
 gem 'sinatra', require: false
 gem 'slim'
+
+gem 'carrierwave-aws'
+
+
+# Grape is a REST-like API micro-framework
+gem 'grape'
+gem 'kramdown'
+gem 'grape-swagger'
+#gem 'grape-swagger-rails'
+gem 'grape-rabl'
+# for grape mass assignment
+#gem "hashie_rails"
+gem "hashie-forbidden_attributes"
+gem 'rabl-rails'
+
+
+# Add pagination for grape api
+gem 'will_paginate' , '~> 3.0'
+gem 'will_paginate-bootstrap'
+gem 'api-pagination'
+
+
+
+
+# Parse
+gem "parse-ruby-client"
+
 
 #add for capistrano
 # gem 'capistrano', '~> 3.2.0'

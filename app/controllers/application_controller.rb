@@ -8,7 +8,18 @@ class ApplicationController < ActionController::Base
 
 
   def admin_required
-	  redirect_to root_path if !current_user.admin?
+	  # redirect_to root_path if !current_user.role?(:admin)
+    # redirect_to root_path unless current_user.is_seller_or_admin?
+    redirect_to root_path unless current_user.is_admin?
+  end
+
+
+  def seller_required
+    redirect_to root_path unless current_user.is_seller?
+  end
+
+  def seller_or_admin_required
+    redirect_to root_path unless current_user.is_seller_or_admin?
   end
 
   helper_method :current_cart

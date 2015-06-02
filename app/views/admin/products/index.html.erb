@@ -1,5 +1,6 @@
 
-<h2> Product List </h2>
+<h2><%= @products.first.store.name %> </h2>
+<h4> Product List  </h4>
 
 <div class="pull-right" style="padding-bottom: 20px;">
   <%= link_to("新增產品", new_admin_product_path, :class => "btn btn-primary btn-sm") %>

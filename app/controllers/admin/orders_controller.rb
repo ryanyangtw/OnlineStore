@@ -3,7 +3,13 @@ class Admin::OrdersController < AdminController
 	before_action :find_order, :except=>[:index]
 
 	def index
-		@orders = Order.recent
+		if current_user.is_admin?
+			@orders = Order.recent
+		else
+			@orders = current_user.selling_orders.recent
+		end
+
+		#@orders = Order.recent
 	end
 
   def show
@@ -56,7 +62,8 @@ class Admin::OrdersController < AdminController
 ###########################
 
 	def find_order
-		@order = Order.find_by_token(params[:id])
+		@order = current_user.selling_orders.find_by(token: params[:id])
+		# @order = Order.find_by_token(params[:id])
 	end
 
 end

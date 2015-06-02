@@ -2,14 +2,18 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">ArtStore</a>
+      <a class="navbar-brand" href="/">Online Store</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
-          <%= link_to("Products", products_path) %>
+          <%= link_to("我要開店", new_store_path) if user_signed_in? && !current_user.is_seller_or_admin? %>
+        </li>
+
+        <li class="active">
+          <%= link_to("瀏覽商品", products_path) %>
         </li>
       </ul>
 
@@ -33,7 +37,7 @@
 
           <%#=fb_like("http://inkryan.com", :width => 120, :layout => "button_count")%>
 
-          <div class="fb-like div-fb" data-href="http://inkryan.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+          <!-- <div class="fb-like div-fb" data-href="http://inkryan.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div> -->
          
         </li>
 
@@ -56,9 +60,16 @@
 
           <ul class="dropdown-menu">
 
-            <% if current_user.admin? %>
+            <% if current_user.role?(:admin) %>
 
             <li> <%= link_to("Admin Panel", admin_products_path ) %> </li>
+
+            <li class="divider"></li>
+            <% end %>
+
+            <% if current_user.is_seller_or_admin? %>
+
+            <li> <%= link_to("管理我的商店", admin_my_store_path ) %> </li>
 
             <li class="divider"></li>
             <% end %>

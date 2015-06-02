@@ -40,6 +40,8 @@ class Cart < ActiveRecord::Base
 			@product = cart_item.product
 			@product.liquidate_inventory!(cart_item.quantity)
 		end
+
+		#session[:cart_id] = nil
 		self.destroy
 	end
 

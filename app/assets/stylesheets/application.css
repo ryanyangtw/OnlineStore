@@ -16,6 +16,7 @@
  *= require products
  *= require bootstrap_and_customization
  *= require flat-ui
+ *= require stores
  * require_tree .
  */
 

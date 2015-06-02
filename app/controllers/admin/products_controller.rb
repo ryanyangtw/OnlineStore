@@ -4,7 +4,14 @@ class Admin::ProductsController < AdminController
 
 
 	def index
-		@products = Product.order("created_at DESC").paginate(:page => params[:page], :per_page=>20)
+		#@products = Product.order("created_at DESC").paginate(:page => params[:page], :per_page=>20)
+		if current_user.is_admin?
+			@products = Product.order("created_at DESC").paginate(:page => params[:page], :per_page=>20)
+		else
+			@products = current_user.store.products.order("created_at DESC").paginate(:page => params[:page], :per_page=>20)
+		end
+		
+		#@store = current_user.store
 	end
 
 	def show
@@ -12,16 +19,19 @@ class Admin::ProductsController < AdminController
 	end
 
 	def new
-		@product = Product.new
-		@product.photos.build
-		#@photo = @Product.photos.new
+		store = current_user.store
+		@product = store.products.build
+		#@product = Product.new
+		#@product.photos.build
 	end
 
 	def create
-		@product = Product.new(product_params)
+		store = current_user.store
+		@product = store.products.build(product_params)
+		#@product = Product.new(product_params)
 
 		if @product.save
-			redirect_to admin_products_path
+			redirect_to admin_my_store_path
 		else
 			render :new
 		end	
@@ -50,7 +60,12 @@ class Admin::ProductsController < AdminController
 	private
 
 	def find_product
-		@product = Product.find(params[:id])
+		if current_user.is_admin?
+			@product = Product.find(params[:id])
+		else
+			@product = curretn_user.store.products.find(params[:id])
+		end
+		
 	end
 
 	def product_params

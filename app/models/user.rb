@@ -25,9 +25,37 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
+  has_one :store
+  has_many :selling_orders, class_name: "Order", foreign_key: :seller_id
 
-  def admin?
-    is_admin
-  end         
+  has_many :order_items, foreign_key: :seller_id
+
+
+
+  def role?(checking_role)
+    self.role == checking_role.to_s
+  end
+
+
+  def is_seller_or_admin?
+    is_seller? || is_admin?
+  end
+
+  def is_seller?
+    self.role?(:seller)
+  end
+
+  def is_admin?
+    self.role?(:admin)
+  end
+
+
+  def udpate_role!(new_role)
+    self.update_columns(role: new_role.to_s)
+  end
+
+  # def admin?
+  #   is_admin
+  # end         
 
 end

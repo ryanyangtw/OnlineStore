@@ -1,0 +1,26 @@
+<div class="row">
+
+<% @stores.each do |store| %>
+  <div class="col-md-4 store-box">
+    <div class="panel panel-default">
+      <div class="group">
+        <%= link_to store_path(store) do%>
+          <%= image_tag(store.image_url, class: "img-cover") %>
+        <%end%>
+      </div>
+
+      <hr>
+      
+      
+      <%= image_tag("http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(store.owner.try(:email).try(:downcase))}?s=40", class: "img-avatar")%>
+  
+      <%= store.name %>
+       
+      
+    </div>
+
+  </div>
+<% end %>
+
+</div>
+

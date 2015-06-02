@@ -1,0 +1,15 @@
+<div class="col-md-6 col-md-offset-3 well">
+  <h1>New Store</h1>
+
+  <!-- This path seemly wrong. Should be admin_products_path -->
+  <%= simple_form_for @store, html: { multipart: true},:url => stores_path(@store) do |f| %>
+
+  <%= render(:partial=>'form', :locals=>{:f=>f})%>
+ 
+  
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+
+  <% end %>
+</div>
