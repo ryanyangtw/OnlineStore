@@ -18,7 +18,8 @@ class CreditCardPaymentService
 
     @amount = @order.total * 100 # in cents
    
-    Stripe.api_key = Settings.stripe.secret_key
+    # Stripe.api_key = Settings.stripe.secret_key
+    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
  
     customer = Stripe::Customer.create(
       #:email => current_user.email,

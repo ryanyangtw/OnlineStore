@@ -1,5 +1,5 @@
 
-<h2><%= @products.first.store.name %> </h2>
+<h2><%= @products.try(:first).try(:store).try(:name) %> </h2>
 <h4> Product List  </h4>
 
 <div class="pull-right" style="padding-bottom: 20px;">
