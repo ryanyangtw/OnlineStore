@@ -1,0 +1,15 @@
+defaults: &defaults
+  
+  stripe:
+    public_key: 'pk_test_4TNwAuqdAD1y0Ut9RTr1iVI1'
+
+development:
+  <<: *defaults
+
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+

@@ -2,4 +2,18 @@
 /config/application.yml
 
 
-/config/settings.yml
+#/config/settings.yml
+
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+
+.DS_Store
+public/system/*
+public/uploads
